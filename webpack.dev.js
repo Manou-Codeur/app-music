@@ -6,7 +6,7 @@ module.exports = merge(common, {
     mode: "development",
     output: {
         filename: "bundled.js",
-        path: path.resolve(__dirname, "bundledFloder")
+        path: path.resolve(__dirname, "docs")
     },
     module: {
         rules: [

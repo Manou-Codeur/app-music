@@ -8,7 +8,7 @@ module.exports = merge(common, {
     mode: "production",
     output: {
         filename: "bundled.[contentHash].js",
-        path: path.resolve(__dirname, "bundledFloder")
+        path: path.resolve(__dirname, "docs")
     },
     plugins: [
         new miniCssExtract({filename: "[name].[contentHash].css"}),
