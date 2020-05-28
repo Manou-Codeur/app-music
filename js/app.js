@@ -11,7 +11,6 @@ const state = {};
 
 document.querySelector(components.input).addEventListener('input', liveSearch);
 document.addEventListener('keypress', e => {if (e.keyCode === 13) { 
-    View.displayMainLoader();
     whenEnter();
     document.addEventListener('click', playANDpause);   
 }});
@@ -35,7 +34,6 @@ async function liveSearch () {
             document.querySelector(components.suggestBar).addEventListener('click', (e) => {
                 document.querySelector(components.input).value = e.target.childNodes[1].nodeValue;
                 View.hideSuggestBox();
-                View.displayMainLoader();
                 whenEnter();
                 document.addEventListener('click', playANDpause); 
             });
@@ -52,6 +50,7 @@ async function whenEnter () {
     View.clearInput();
     View.hideLoader();
     View.clearUI();
+    View.displayMainLoader();
     
     //2. pass this value as param to modal and return a list of els then display these els to the UI using function from the view
     if (inputValue.trim()) {
