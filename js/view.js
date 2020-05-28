@@ -63,7 +63,6 @@ export function displaySuggest (arr) {
     suggestContainner.className = "search__recomand";
     document.querySelector(components.searchContainner).appendChild(suggestContainner);
     
-
     for (let i=0; i<7; i++) {
         const htmlContent = `
         <p><span class="arrow">></span> ${arr[i].title}</p>
