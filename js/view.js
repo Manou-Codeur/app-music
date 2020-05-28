@@ -58,17 +58,24 @@ function initPlayIcon () {
     }
 }
 
-// export function displaySuggest (arr) {
-//     const suggestContainner = document.createElement('div');
-//     suggestContainner.className = "search__recomand";
-//     document.querySelector(components.searchContainner).appendChild(suggestContainner);
+export function displaySuggest (arr) {
+    const searchRecomand = document.querySelector(components.suggestBar);
+    if (searchRecomand) searchRecomand.parentNode.removeChild(searchRecomand);
+
+    const suggestContainner = document.createElement('div');
+    suggestContainner.className = "search__recomand";
+    document.querySelector(components.searchContainner).appendChild(suggestContainner);
     
-//     for (let i=0; i<7; i++) {
-//         const htmlContent = `
-//         <p><span class="arrow">></span> ${arr[i].title}</p>
-//         `;        
-//         suggestContainner.insertAdjacentHTML('beforeend', htmlContent);
-//     }
+    // console.log(arr)
+    for (let i=0; i<7; i++) {        
+        suggestContainner.insertAdjacentHTML('beforeend', `<p><span class="arrow">></span>${arr[i].title}</p>`);
+    }
+}
 
-// }
+export function displayLoader () {
+    document.querySelector(components.loader).style.display = 'initial';
+}
 
+export function hideLoader () {
+    document.querySelector(components.loader).style.display = 'none';
+}

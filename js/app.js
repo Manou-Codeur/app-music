@@ -20,10 +20,22 @@ document.querySelector(components.voiceIcon).addEventListener('click', soundReco
 async function liveSearch () {
     //1. get the input from the view
     let inputValue = View.getInput();
+
+    View.displayLoader();
     
     //2. ask the model to fetch and return a list of 5 els by passing the input gotten as param and display these els in the list of recomand in UI 
-
-
+    if (inputValue.trim()) {
+        state.search = new Modal.generateData(inputValue);
+        try {
+            await state.search.getData();
+            View.displaySuggest(state.search.result);
+            
+            View.hideLoader();
+        }catch (err) {
+            console.log(err);
+        }
+    }
+    
     //4. get the value chosen by the user (use another function that handle an click event in all that recomand els displayed)
     //5. pass this value as param to modal and return a list of els 
     //6. display these els to the UI using function from the view 
@@ -44,6 +56,7 @@ async function whenEnter () {
         try {
             await state.search.getData();
             View.addItemToUI(state.search.result);
+            state = {};
         }catch (err) {
             console.log(err);
         }
