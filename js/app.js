@@ -9,7 +9,7 @@ import * as Modal from './modal';
 
 const state = {};
 
-document.querySelector(components.input).addEventListener('input', liveSearch);
+document.querySelector(components.input).addEventListener('change', liveSearch);
 document.addEventListener('keypress', e => {if (e.keyCode === 13) {
     whenEnter();
     document.addEventListener('click', playANDpause);   
@@ -20,11 +20,12 @@ document.querySelector(components.voiceIcon).addEventListener('click', soundReco
 async function liveSearch () {
     //1. get the input from the view
     let inputValue = View.getInput();
-
-    View.displayLoader();
+    
+    
     
     //2. ask the model to fetch and return a list of 5 els by passing the input gotten as param and display these els in the list of recomand in UI 
     if (inputValue.trim()) {
+        View.displayLoader();
         state.search = new Modal.generateData(inputValue);
         try {
             await state.search.getData();
