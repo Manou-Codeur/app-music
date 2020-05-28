@@ -60,7 +60,7 @@ function initPlayIcon () {
 
 export function displaySuggest (arr) {
     const searchRecomand = document.querySelector(components.suggestBar);
-    if (searchRecomand) searchRecomand.parentNode.removeChild(searchRecomand)
+    if (searchRecomand) searchRecomand.parentNode.removeChild(searchRecomand);
 
     const suggestContainner = document.createElement('div');
     suggestContainner.className = "search__recomand";
@@ -84,5 +84,13 @@ export function hideLoader () {
 export function hideSuggestBox () {
     const searchRecomand = document.querySelector(components.suggestBar);
     searchRecomand.style.display = 'none'
+}
+
+export function displayMainLoader () {
+    document.querySelector(components.mainLoader).style.display = 'initial';
+}
+
+export function hideMainLoader () {
+    document.querySelector(components.mainLoader).style.display = 'none';
 }
 

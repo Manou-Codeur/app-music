@@ -41,10 +41,6 @@ async function liveSearch () {
             console.log(err);
         }
     }
-
-    //4. get the value chosen by the user (use another function that handle an click event in all that recomand els displayed)
-    //5. pass this value as param to modal and return a list of els 
-    //6. display these els to the UI using function from the view 
 };
 
 async function whenEnter () {
@@ -52,7 +48,12 @@ async function whenEnter () {
     //1. get the input from the view then clear it
     let inputValue = View.getInput().trim();
     View.clearInput();
+    View.hideSuggestBox();
     
+    //tst
+    View.displayMainLoader();
+    //tst
+
     //clear the page
     View.clearUI();
     
@@ -61,6 +62,7 @@ async function whenEnter () {
         state.searchh = new Modal.generateData(inputValue);
         try {
             await state.searchh.getData();
+            View.hideMainLoader();
             View.addItemToUI(state.searchh.result);
         }catch (err) {
             console.log(err);

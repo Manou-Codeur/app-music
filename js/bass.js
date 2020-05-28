@@ -9,5 +9,6 @@ export default {
     likeBtn: '.like-btn',
     searchContainner: '.search',
     suggestBar: '.search__recomand',
-    loader: '.search__loader'
+    loader: '.search__loader',
+    mainLoader: '.song-waiting'
 }
