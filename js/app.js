@@ -11,14 +11,14 @@ const state = {};
 
 document.querySelector(components.input).addEventListener('input', liveSearch);
 document.addEventListener('keypress', e => {if (e.keyCode === 13) { 
+    View.displayMainLoader();
     whenEnter();
     document.addEventListener('click', playANDpause);   
-}})
+}});
 document.querySelector(components.voiceIcon).addEventListener('click', soundReco); 
-document.addEventListener('click', (e) => {
-    document.querySelector(components.suggestBar).style.display = 'none';
-})
-
+document.addEventListener('click', () => {
+    View.hideSuggestBox();
+});
 
 async function liveSearch () {
     //1. get the input from the view
@@ -33,8 +33,9 @@ async function liveSearch () {
             View.displaySuggest(state.searchh.result);
             View.hideLoader();
             document.querySelector(components.suggestBar).addEventListener('click', (e) => {
-                View.hideSuggestBox();
                 document.querySelector(components.input).value = e.target.childNodes[1].nodeValue;
+                View.hideSuggestBox();
+                View.displayMainLoader();
                 whenEnter();
                 document.addEventListener('click', playANDpause); 
             });
@@ -50,7 +51,6 @@ async function whenEnter () {
     let inputValue = View.getInput().trim();
     View.clearInput();
     View.hideLoader();
-    View.displayMainLoader();
     View.clearUI();
     
     //2. pass this value as param to modal and return a list of els then display these els to the UI using function from the view
@@ -58,8 +58,8 @@ async function whenEnter () {
         state.searchh = new Modal.generateData(inputValue);
         try {
             await state.searchh.getData();
-            View.hideMainLoader();
             View.addItemToUI(state.searchh.result);
+            View.hideMainLoader();
         }catch (err) {
             console.log(err);
         }
@@ -89,4 +89,4 @@ function playANDpause (e) {
             el.parentNode.parentNode.childNodes[1].pause();
         } 
     }
-}
+};
