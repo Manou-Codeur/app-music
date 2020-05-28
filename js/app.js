@@ -9,7 +9,7 @@ import * as Modal from './modal';
 
 const state = {};
 
-document.querySelector(components.input).addEventListener('change', liveSearch);
+document.querySelector(components.input).addEventListener('input', liveSearch);
 document.addEventListener('keypress', e => {if (e.keyCode === 13) {
     whenEnter();
     document.addEventListener('click', playANDpause);   
@@ -20,9 +20,7 @@ document.querySelector(components.voiceIcon).addEventListener('click', soundReco
 async function liveSearch () {
     //1. get the input from the view
     let inputValue = View.getInput();
-    
-    
-    
+
     //2. ask the model to fetch and return a list of 5 els by passing the input gotten as param and display these els in the list of recomand in UI 
     if (inputValue.trim()) {
         View.displayLoader();
@@ -30,13 +28,14 @@ async function liveSearch () {
         try {
             await state.search.getData();
             View.displaySuggest(state.search.result);
-            
             View.hideLoader();
+            //add function that handle the click event in the suggest box
+       
         }catch (err) {
             console.log(err);
         }
     }
-    
+
     //4. get the value chosen by the user (use another function that handle an click event in all that recomand els displayed)
     //5. pass this value as param to modal and return a list of els 
     //6. display these els to the UI using function from the view 

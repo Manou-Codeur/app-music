@@ -60,15 +60,16 @@ function initPlayIcon () {
 
 export function displaySuggest (arr) {
     const searchRecomand = document.querySelector(components.suggestBar);
-    if (searchRecomand) searchRecomand.parentNode.removeChild(searchRecomand);
+    if (searchRecomand) searchRecomand.parentNode.removeChild(searchRecomand)
 
     const suggestContainner = document.createElement('div');
     suggestContainner.className = "search__recomand";
     document.querySelector(components.searchContainner).appendChild(suggestContainner);
     
     // console.log(arr)
-    for (let i=0; i<7; i++) {        
-        suggestContainner.insertAdjacentHTML('beforeend', `<p><span class="arrow">></span>${arr[i].title}</p>`);
+    for (let i=0; i<7; i++) {    
+        if (i >= arr.length) break;    
+        suggestContainner.insertAdjacentHTML('beforeend', `<p><span class="arrow">></span> ${arr[i].title}</p>`);
     }
 }
 
@@ -79,3 +80,12 @@ export function displayLoader () {
 export function hideLoader () {
     document.querySelector(components.loader).style.display = 'none';
 }
+ 
+// export function tst () {
+//     const searchRecomand = document.querySelector(components.suggestBar);
+//     if (searchRecomand) {
+//         searchRecomand.addEventListener('click', (e) => {
+//             return e.target.childNodes[1].nodeValue;
+//         })
+//     }
+// }
