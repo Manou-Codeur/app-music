@@ -81,11 +81,8 @@ export function hideLoader () {
     document.querySelector(components.loader).style.display = 'none';
 }
  
-// export function tst () {
-//     const searchRecomand = document.querySelector(components.suggestBar);
-//     if (searchRecomand) {
-//         searchRecomand.addEventListener('click', (e) => {
-//             return e.target.childNodes[1].nodeValue;
-//         })
-//     }
-// }
+export function hideSuggestBox () {
+    const searchRecomand = document.querySelector(components.suggestBar);
+    searchRecomand.style.display = 'none'
+}
+

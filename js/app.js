@@ -17,6 +17,7 @@ document.addEventListener('keypress', e => {if (e.keyCode === 13) {
 document.querySelector(components.voiceIcon).addEventListener('click', soundReco); 
 
 
+
 async function liveSearch () {
     //1. get the input from the view
     let inputValue = View.getInput();
@@ -24,13 +25,18 @@ async function liveSearch () {
     //2. ask the model to fetch and return a list of 5 els by passing the input gotten as param and display these els in the list of recomand in UI 
     if (inputValue.trim()) {
         View.displayLoader();
-        state.search = new Modal.generateData(inputValue);
+        state.tst = new Modal.generateData(inputValue);
         try {
-            await state.search.getData();
-            View.displaySuggest(state.search.result);
+            await state.tst.getData();
+            View.displaySuggest(state.tst.result);
             View.hideLoader();
             //add function that handle the click event in the suggest box
-       
+            document.querySelector(components.suggestBar).addEventListener('click', (e) => {
+                View.hideSuggestBox();
+                document.querySelector(components.input).value = e.target.childNodes[1].nodeValue;
+                whenEnter();
+                document.addEventListener('click', playANDpause); 
+            });
         }catch (err) {
             console.log(err);
         }
@@ -52,11 +58,10 @@ async function whenEnter () {
     
     //2. pass this value as param to modal and return a list of els then display these els to the UI using function from the view
     if (inputValue.trim()) {
-        state.search = new Modal.generateData(inputValue);
+        state.searchh = new Modal.generateData(inputValue);
         try {
-            await state.search.getData();
-            View.addItemToUI(state.search.result);
-            state = {};
+            await state.searchh.getData();
+            View.addItemToUI(state.searchh.result);
         }catch (err) {
             console.log(err);
         }
