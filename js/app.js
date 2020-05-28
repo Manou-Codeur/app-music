@@ -22,15 +22,8 @@ async function liveSearch () {
     let inputValue = View.getInput();
     
     //2. ask the model to fetch and return a list of 5 els by passing the input gotten as param and display these els in the list of recomand in UI 
-    if (inputValue.trim()) {
-        state.searchForLive = new Modal.generateData(inputValue);
 
-        await state.searchForLive.getData();
-        View.displaySuggest(state.searchForLive.result);
-    }
-    // else {
-    //     alert('filled not accepted!')
-    // }
+
     //4. get the value chosen by the user (use another function that handle an click event in all that recomand els displayed)
     //5. pass this value as param to modal and return a list of els 
     //6. display these els to the UI using function from the view 
@@ -52,8 +45,7 @@ async function whenEnter () {
             await state.search.getData();
             View.addItemToUI(state.search.result);
         }catch (err) {
-            if (err.message === "Cannot read property 'album' of undefined") alert('song not found!');
-            else alert('sorry there is an technical problem, please try again!')
+            console.log(err);
         }
     }else {
         alert('filled not accepted!')

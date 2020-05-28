@@ -58,17 +58,17 @@ function initPlayIcon () {
     }
 }
 
-export function displaySuggest (arr) {
-    const suggestContainner = document.createElement('div');
-    suggestContainner.className = "search__recomand";
-    document.querySelector(components.searchContainner).appendChild(suggestContainner);
+// export function displaySuggest (arr) {
+//     const suggestContainner = document.createElement('div');
+//     suggestContainner.className = "search__recomand";
+//     document.querySelector(components.searchContainner).appendChild(suggestContainner);
     
-    for (let i=0; i<7; i++) {
-        const htmlContent = `
-        <p><span class="arrow">></span> ${arr[i].title}</p>
-        `;        
-        suggestContainner.insertAdjacentHTML('beforeend', htmlContent);
-    }
+//     for (let i=0; i<7; i++) {
+//         const htmlContent = `
+//         <p><span class="arrow">></span> ${arr[i].title}</p>
+//         `;        
+//         suggestContainner.insertAdjacentHTML('beforeend', htmlContent);
+//     }
 
-}
+// }
 
