@@ -10,27 +10,28 @@ import * as Modal from './modal';
 const state = {};
 
 document.querySelector(components.input).addEventListener('input', liveSearch);
-document.addEventListener('keypress', e => {if (e.keyCode === 13) {
+document.addEventListener('keypress', e => {if (e.keyCode === 13) { 
     whenEnter();
     document.addEventListener('click', playANDpause);   
 }})
 document.querySelector(components.voiceIcon).addEventListener('click', soundReco); 
-
+document.addEventListener('click', (e) => {
+    document.querySelector(components.suggestBar).style.display = 'none';
+})
 
 
 async function liveSearch () {
     //1. get the input from the view
     let inputValue = View.getInput();
+    View.displayLoader();
 
     //2. ask the model to fetch and return a list of 5 els by passing the input gotten as param and display these els in the list of recomand in UI 
     if (inputValue.trim()) {
-        View.displayLoader();
-        state.tst = new Modal.generateData(inputValue);
+        state.searchh = new Modal.generateData(inputValue);
         try {
-            await state.tst.getData();
-            View.displaySuggest(state.tst.result);
+            await state.searchh.getData();
+            View.displaySuggest(state.searchh.result);
             View.hideLoader();
-            //add function that handle the click event in the suggest box
             document.querySelector(components.suggestBar).addEventListener('click', (e) => {
                 View.hideSuggestBox();
                 document.querySelector(components.input).value = e.target.childNodes[1].nodeValue;
@@ -44,17 +45,12 @@ async function liveSearch () {
 };
 
 async function whenEnter () {
- 
+    
     //1. get the input from the view then clear it
     let inputValue = View.getInput().trim();
     View.clearInput();
-    View.hideSuggestBox();
-    
-    //tst
+    View.hideLoader();
     View.displayMainLoader();
-    //tst
-
-    //clear the page
     View.clearUI();
     
     //2. pass this value as param to modal and return a list of els then display these els to the UI using function from the view

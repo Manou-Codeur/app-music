@@ -59,12 +59,11 @@ function initPlayIcon () {
 }
 
 export function displaySuggest (arr) {
-    const searchRecomand = document.querySelector(components.suggestBar);
-    if (searchRecomand) searchRecomand.parentNode.removeChild(searchRecomand);
+    const pSuggestion = document.querySelectorAll(`${components.suggestBar} p`);
+    for (let els of pSuggestion) els.parentNode.removeChild(els);
 
-    const suggestContainner = document.createElement('div');
-    suggestContainner.className = "search__recomand";
-    document.querySelector(components.searchContainner).appendChild(suggestContainner);
+    const suggestContainner = document.querySelector(components.suggestBar);
+    suggestContainner.style.display = 'inline-block';  
     
     // console.log(arr)
     for (let i=0; i<7; i++) {    
@@ -82,8 +81,8 @@ export function hideLoader () {
 }
  
 export function hideSuggestBox () {
-    const searchRecomand = document.querySelector(components.suggestBar);
-    searchRecomand.style.display = 'none'
+    const suggestContainner = document.querySelector(components.suggestBar);
+    suggestContainner.style.display = 'none';
 }
 
 export function displayMainLoader () {

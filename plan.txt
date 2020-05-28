@@ -1,0 +1,12 @@
+plan about the recomman box
+---------------------------
+
+
+
+if (keyCode === 13) hide the recomman box
+
+
+
+
+try to do:
+if (enter event) dismiss the live search
