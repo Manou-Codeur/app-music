@@ -88,4 +88,4 @@ function playANDpause (e) {
             el.parentNode.parentNode.childNodes[1].pause();
         } 
     }
-};
+
