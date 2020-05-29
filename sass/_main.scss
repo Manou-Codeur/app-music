@@ -9,4 +9,24 @@ body {
     background: linear-gradient(rgba(249, 187, 0, 0.7), rgba(249, 187, 0, 0.7)) ,url('../img/bruce-mars-DBGwy7s3QY0-unsplash.jpg') repeat-y;
     background-size: cover;
     height: 100vh;
+    position: relative;
+}
+
+.song-waiting {
+    height: 5rem;
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    animation: rotatee infinite 1s linear;
+    display: none;
+}
+
+@keyframes rotatee {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

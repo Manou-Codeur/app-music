@@ -10,50 +10,57 @@ import * as Modal from './modal';
 const state = {};
 
 document.querySelector(components.input).addEventListener('input', liveSearch);
-document.addEventListener('keypress', e => {if (e.keyCode === 13) {
+document.addEventListener('keypress', e => {if (e.keyCode === 13) { 
     whenEnter();
     document.addEventListener('click', playANDpause);   
-}})
+}});
 document.querySelector(components.voiceIcon).addEventListener('click', soundReco); 
-
+document.addEventListener('click', () => {
+    View.hideSuggestBox();
+});
 
 async function liveSearch () {
     //1. get the input from the view
     let inputValue = View.getInput();
-    
+    View.displayLoader();
+
     //2. ask the model to fetch and return a list of 5 els by passing the input gotten as param and display these els in the list of recomand in UI 
     if (inputValue.trim()) {
-        state.searchForLive = new Modal.generateData(inputValue);
-
-        await state.searchForLive.getData();
-        View.displaySuggest(state.searchForLive.result);
+        state.searchh = new Modal.generateData(inputValue);
+        try {
+            await state.searchh.getData();
+            View.displaySuggest(state.searchh.result);
+            View.hideLoader();
+            document.querySelector(components.suggestBar).addEventListener('click', (e) => {
+                document.querySelector(components.input).value = e.target.childNodes[1].nodeValue;
+                View.hideSuggestBox();
+                whenEnter();
+                document.addEventListener('click', playANDpause); 
+            });
+        }catch (err) {
+            console.log(err);
+        }
     }
-    // else {
-    //     alert('filled not accepted!')
-    // }
-    //4. get the value chosen by the user (use another function that handle an click event in all that recomand els displayed)
-    //5. pass this value as param to modal and return a list of els 
-    //6. display these els to the UI using function from the view 
 };
 
 async function whenEnter () {
- 
+    
     //1. get the input from the view then clear it
     let inputValue = View.getInput().trim();
     View.clearInput();
-    
-    //clear the page
+    View.hideLoader();
     View.clearUI();
+    View.displayMainLoader();
     
     //2. pass this value as param to modal and return a list of els then display these els to the UI using function from the view
     if (inputValue.trim()) {
-        state.search = new Modal.generateData(inputValue);
+        state.searchh = new Modal.generateData(inputValue);
         try {
-            await state.search.getData();
-            View.addItemToUI(state.search.result);
+            await state.searchh.getData();
+            View.addItemToUI(state.searchh.result);
+            View.hideMainLoader();
         }catch (err) {
-            if (err.message === "Cannot read property 'album' of undefined") alert('song not found!');
-            else alert('sorry there is an technical problem, please try again!')
+            console.log(err);
         }
     }else {
         alert('filled not accepted!')
@@ -81,6 +88,4 @@ function playANDpause (e) {
             el.parentNode.parentNode.childNodes[1].pause();
         } 
     }
-}
 
-//this for try the docs

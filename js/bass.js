@@ -8,5 +8,7 @@ export default {
     playBtn: '.play-btn',
     likeBtn: '.like-btn',
     searchContainner: '.search',
-    suggestBar: '.search__recomand'
+    suggestBar: '.search__recomand',
+    loader: '.search__loader',
+    mainLoader: '.song-waiting'
 }

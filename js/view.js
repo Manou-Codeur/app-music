@@ -59,17 +59,37 @@ function initPlayIcon () {
 }
 
 export function displaySuggest (arr) {
-    const suggestContainner = document.createElement('div');
-    suggestContainner.className = "search__recomand";
-    document.querySelector(components.searchContainner).appendChild(suggestContainner);
+    const pSuggestion = document.querySelectorAll(`${components.suggestBar} p`);
+    for (let els of pSuggestion) els.parentNode.removeChild(els);
+
+    const suggestContainner = document.querySelector(components.suggestBar);
+    suggestContainner.style.display = 'inline-block';  
     
-
-    for (let i=0; i<7; i++) {
-        const htmlContent = `
-        <p><span class="arrow">></span> ${arr[i].title}</p>
-        `;        
-        suggestContainner.insertAdjacentHTML('beforeend', htmlContent);
+    // console.log(arr)
+    for (let i=0; i<7; i++) {    
+        if (i >= arr.length) break;    
+        suggestContainner.insertAdjacentHTML('beforeend', `<p><span class="arrow">></span> ${arr[i].title}</p>`);
     }
+}
 
+export function displayLoader () {
+    document.querySelector(components.loader).style.display = 'initial';
+}
+
+export function hideLoader () {
+    document.querySelector(components.loader).style.display = 'none';
+}
+ 
+export function hideSuggestBox () {
+    const suggestContainner = document.querySelector(components.suggestBar);
+    suggestContainner.style.display = 'none';
+}
+
+export function displayMainLoader () {
+    document.querySelector(components.mainLoader).style.display = 'initial';
+}
+
+export function hideMainLoader () {
+    document.querySelector(components.mainLoader).style.display = 'none';
 }
 

@@ -43,6 +43,7 @@
         position: absolute;
         top: 2rem;
         z-index: 999;
+        display: none;
 
         p {
             margin: .4rem 0;
@@ -56,6 +57,24 @@
                 margin: 0 .7rem;
                 font-weight: 900;
             }
+        }
+    }
+
+    &__loader {
+        height: 1.875rem;
+        animation: rotate infinite 1s linear;
+        position: absolute;
+        top: 10%;
+        right: 32%;
+        display: none;
+    }
+
+    @keyframes rotate {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(360deg);
         }
     }
 }
