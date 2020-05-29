@@ -31,7 +31,6 @@ export function addItemToUI (arr) {
         else if (i>=4 && i<8) col2.insertAdjacentHTML('beforeend', htmlContent);
         else if (i>=8 && i<12) col3.insertAdjacentHTML('beforeend', htmlContent);
         else if (i>=12 && i<16) col4.insertAdjacentHTML('beforeend', htmlContent);
-        
     }
     
     initPlayIcon();

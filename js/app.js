@@ -6,6 +6,7 @@ import "../sass/_content.scss";
 import components from './bass';
 import * as View from './view';
 import * as Modal from './modal';
+import {getSoundValue} from './soundReco';
 
 const state = {};
 
@@ -44,7 +45,6 @@ async function liveSearch () {
 };
 
 async function whenEnter () {
-    
     //1. get the input from the view then clear it
     let inputValue = View.getInput().trim();
     View.clearInput();
@@ -67,13 +67,16 @@ async function whenEnter () {
     }
 };
 
-
 function soundReco () {
-    //1. get the input from the view (use another module then import here)
-    //2. pass this value as param to modal and return a list of els 
-    //3. display these els to the UI using function from the view 
+    getSoundValue();
+    let timeIntrvl = setInterval(() => {
+        if (document.querySelector(components.input).value !== "") {
+            whenEnter();
+            clearInterval(timeIntrvl);
+        }
+    }, 1000);
+    document.addEventListener('click', playANDpause);  
 };
-
 
 function playANDpause (e) {
     let el = e.target;
@@ -88,4 +91,4 @@ function playANDpause (e) {
             el.parentNode.parentNode.childNodes[1].pause();
         } 
     }
-
+}
