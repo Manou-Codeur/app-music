@@ -57,8 +57,8 @@ async function whenEnter () {
         state.searchh = new Modal.generateData(inputValue);
         try {
             await state.searchh.getData();
-            View.addItemToUI(state.searchh.result);
             View.hideMainLoader();
+            View.addItemToUI(state.searchh.result);
         }catch (err) {
             console.log(err);
         }
