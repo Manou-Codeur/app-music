@@ -8,7 +8,11 @@ import * as View from './view';
 import * as Modal from './modal';
 import {getSoundValue} from './soundReco';
 
+
 const state = {};
+const popularBtn = document.getElementById(components.popular);
+const favorisBtn = document.getElementById(components.favoris);
+
 
 document.querySelector(components.input).addEventListener('input', liveSearch);
 document.addEventListener('keypress', e => {if (e.keyCode === 13) { 
@@ -16,9 +20,11 @@ document.addEventListener('keypress', e => {if (e.keyCode === 13) {
     document.addEventListener('click', playANDpause);   
 }});
 document.querySelector(components.voiceIcon).addEventListener('click', soundReco); 
-document.addEventListener('click', () => {
-    View.hideSuggestBox();
-});
+document.addEventListener('click', () => View.hideSuggestBox());
+addEventListener('load', firstTimeToPage);
+popularBtn.addEventListener('click', popularRequested);
+favorisBtn.addEventListener('click', favorisRequested);
+
 
 async function liveSearch () {
     //1. get the input from the view
@@ -44,6 +50,7 @@ async function liveSearch () {
     }
 };
 
+
 async function whenEnter () {
     //1. get the input from the view then clear it
     let inputValue = View.getInput().trim();
@@ -67,6 +74,7 @@ async function whenEnter () {
     }
 };
 
+
 function soundReco () {
     getSoundValue();
     let timeIntrvl = setInterval(() => {
@@ -77,6 +85,7 @@ function soundReco () {
     }, 1000);
     document.addEventListener('click', playANDpause);  
 };
+
 
 function playANDpause (e) {
     let el = e.target;
@@ -92,3 +101,24 @@ function playANDpause (e) {
         } 
     }
 };
+
+
+function firstTimeToPage () {
+    document.querySelector(components.input).value = 'eminem';
+    whenEnter();
+    document.addEventListener('click', playANDpause); 
+}
+
+
+function popularRequested () {
+    this.className = 'selected';
+    favorisBtn.classList.remove('selected');
+    firstTimeToPage();
+}
+
+
+function favorisRequested () {
+    popularBtn.classList.remove('selected');
+    this.className = 'selected';
+    View.clearUI();
+}
