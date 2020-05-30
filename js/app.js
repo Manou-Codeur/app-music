@@ -117,14 +117,14 @@ function likeBtnClicked (e) {
             state.likedItem.dltFromStorage(el.parentNode.parentNode.dataset.id);
         }
     }
-}
+};
 
 
 function favorisRequested () {
     popularBtn.classList.remove('selected');
     this.className = 'selected';
     View.clearUI();
-    View.addItemToUILike(JSON.parse(localStorage.getItem('likes')));
+    View.addItemToUI(JSON.parse(localStorage.getItem('likes')), 'clicked');
 };
 
 function popularRequested () {
