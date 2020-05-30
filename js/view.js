@@ -8,7 +8,7 @@ export function clearInput () {
     document.querySelector(components.input).value = "";
 }
 
-export function addItemToUI (arr) {
+export function addItemToUI (arr, like) {
     const col1 = document.querySelector(components.colOne);
     const col2 = document.querySelector(components.colTwo);
     const col3 = document.querySelector(components.colThree);
@@ -21,34 +21,7 @@ export function addItemToUI (arr) {
                 <audio src="${arr[i].preview}"></audio>
                 <div class="icons">
                     <img class="pause-btn" src="./img/play_circle_filled-24px.png" alt="">
-                    <img class="like-btn" src="./img/stars-24px.png" alt="">
-                </div>
-            </div>
-            <div class="title">${arr[i].title}</div>
-        </div>
-        `;
-        if (i < 4) col1.insertAdjacentHTML('beforeend', htmlContent);
-        else if (i>=4 && i<8) col2.insertAdjacentHTML('beforeend', htmlContent);
-        else if (i>=8 && i<12) col3.insertAdjacentHTML('beforeend', htmlContent);
-        else if (i>=12 && i<16) col4.insertAdjacentHTML('beforeend', htmlContent);
-    }
-    
-    initPlayIcon();
-}
-export function addItemToUILike (arr) {
-    const col1 = document.querySelector(components.colOne);
-    const col2 = document.querySelector(components.colTwo);
-    const col3 = document.querySelector(components.colThree);
-    const col4 = document.querySelector(components.colFour);
-
-    for (let i=0; i<16; i++) {
-        let htmlContent = `
-        <div class="content__songs__col__songContainner">
-            <div class="song" data-img=${arr[i].album.cover_medium} data-id=${arr[i].id} style="background-image: url(${arr[i].album.cover_medium});">
-                <audio src="${arr[i].preview}"></audio>
-                <div class="icons">
-                    <img class="pause-btn" src="./img/play_circle_filled-24px.png" alt="">
-                    <img class="like-btn clicked" src="./img/stars-24px.png" alt="">
+                    <img class="like-btn ${like}" src="./img/stars-24px.png" alt="">
                 </div>
             </div>
             <div class="title">${arr[i].title}</div>
