@@ -20,4 +20,34 @@ export class generateData {
     }
 }
 
+export class likedSong {
+    constructor () {
+        this.likes = [];
+    }
+
+    addLiked (id, img, audio, title) {
+        const song = {
+            id,
+            album : {cover_medium: img},
+            preview: audio,
+            title
+        }   
+        this.likes.push(song);
+
+        this.addToStorage();
+    }
+
+    addToStorage () {
+        localStorage.setItem('likes', JSON.stringify(this.likes));
+    }
+
+    dltFromStorage (id) {
+        const index = this.likes.findIndex(el => el.id === id);
+        this.likes.splice(index, 1);
+
+        this.addToStorage();
+    }
+
+}   
+
 

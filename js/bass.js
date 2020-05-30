@@ -10,5 +10,7 @@ export default {
     searchContainner: '.search',
     suggestBar: '.search__recomand',
     loader: '.search__loader',
-    mainLoader: '.song-waiting'
+    mainLoader: '.song-waiting',
+    popular: 'popular-btn',
+    favoris: 'favoris-btn'
 }
