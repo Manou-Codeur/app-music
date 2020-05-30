@@ -35,6 +35,7 @@ export function addItemToUI (arr) {
     
     initPlayIcon();
 }
+
 export function addItemToUILike (arr) {
     const col1 = document.querySelector(components.colOne);
     const col2 = document.querySelector(components.colTwo);

@@ -125,7 +125,12 @@ function favorisRequested () {
     this.className = 'selected';
     View.clearUI();
     View.addItemToUILike(JSON.parse(localStorage.getItem('likes')));
-    
+};
+
+function popularRequested () {
+    this.className = 'selected';
+    favorisBtn.classList.remove('selected');
+    firstTimeToPage();
 };
 
 
@@ -135,11 +140,3 @@ function firstTimeToPage () {
     document.addEventListener('click', playANDpause); 
     document.addEventListener('click', likeBtnClicked);
 };
-
-
-function popularRequested () {
-    this.className = 'selected';
-    favorisBtn.classList.remove('selected');
-    firstTimeToPage();
-};
-
