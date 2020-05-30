@@ -1,12 +1,4 @@
-plan about the recomman box
----------------------------
+plan about the like btn
+-----------------------
 
-
-
-if (keyCode === 13) hide the recomman box
-
-
-
-
-try to do:
-if (enter event) dismiss the live search
+1. you have to take tracks of all changes in the 
