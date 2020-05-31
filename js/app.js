@@ -94,11 +94,11 @@ function playANDpause (e) {
 
     if (el.className === 'pause-btn') {
         if (el.parentNode.parentNode.childNodes[1].paused) {
-            el.src = "./img/round_pause_circle_filled_white_18dp.png";
+            el.src = "./img/img/round_pause_circle_filled_white_18dp.png";
             el.parentNode.parentNode.childNodes[1].play();
         } 
         else {
-            el.src = "./img/play_circle_filled-24px.png";
+            el.src = "./img/img/play_circle_filled-24px.png";
             el.parentNode.parentNode.childNodes[1].pause();
         } 
     }

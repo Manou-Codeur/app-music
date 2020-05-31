@@ -1,5 +1,6 @@
 import components from './bass';
 
+
 export function getInput () {
     return document.querySelector(components.input).value;
 }
@@ -20,8 +21,8 @@ export function addItemToUI (arr, like) {
             <div class="song" data-img=${arr[i].album.cover_medium} data-id=${arr[i].id} style="background-image: url(${arr[i].album.cover_medium});">
                 <audio src="${arr[i].preview}"></audio>
                 <div class="icons">
-                    <img class="pause-btn" src="./img/play_circle_filled-24px.png" alt="">
-                    <img class="like-btn ${like}" src="./img/stars-24px.png" alt="">
+                    <img class="pause-btn" src="./img/img/play_circle_filled-24px.png" alt="">
+                    <img class="like-btn ${like}" src="./img/img/stars-24px.png" alt="">
                 </div>
             </div>
             <div class="title">${arr[i].title}</div>
@@ -52,7 +53,7 @@ function initPlayIcon () {
     let myAudiuos = document.querySelectorAll('audio');
     for (let els of myAudiuos) {
         els.addEventListener('timeupdate', () => {
-            if (els.currentTime === els.duration) els.nextElementSibling.childNodes[1].src = "./img/play_circle_filled-24px.png";
+            if (els.currentTime === els.duration) els.nextElementSibling.childNodes[1].src = "./img/img/play_circle_filled-24px.png";
         })
     }
 }
