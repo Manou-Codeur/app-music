@@ -9,13 +9,13 @@ export function getSoundValue () {
         const transcript = event.results[current][0].transcript;
 
         components.input.value = transcript;
-        tst('You have just said' + transcript);
+        speak('You have just said' + transcript);
     }
 
     recognition.start();
 }
 
-function tst (msg) {
+function speak (msg) {
     const speech = new SpeechSynthesisUtterance();
     speech.text = msg;
     speech.volume = 1;

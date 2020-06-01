@@ -7,23 +7,24 @@ import {getSoundValue} from './soundReco';
 
 const state = {};
 
-components.input.addEventListener('input', liveSearch);
-document.addEventListener('keypress', e => {if (e.keyCode === 13) { 
+components.input.addEventListener('keyup', liveSearch);
+document.addEventListener('keypress', e => {
+    if (e.keyCode === 13) { 
     whenEnter();
     document.addEventListener('click', playANDpause);  
     document.addEventListener('click', likeBtnClicked); 
-}});
+    }
+});
 components.voiceIcon.addEventListener('click', soundReco); 
 document.addEventListener('click', () => View.hideSuggestBox());
 addEventListener('load', firstTimeToPage);
 components.popularBtn.addEventListener('click', popularRequested);
 components.favorisBtn.addEventListener('click', favorisRequested);
 
-
 async function liveSearch () {
     //1. get the input from the view
-    let inputValue = View.getInput();
     View.displayLoader();
+    let inputValue = View.getInput();
 
     //2. ask the model to fetch and return a list of 5 els by passing the input gotten as param and display these els in the list of recomand in UI 
     if (inputValue.trim()) {
@@ -32,19 +33,25 @@ async function liveSearch () {
             await state.searchh.getData();
             View.displaySuggest(state.searchh.result);
             View.hideLoader();
-            components.suggestBar.addEventListener('click', (e) => {
-                components.input.value = e.target.childNodes[1].nodeValue;
-                View.hideSuggestBox();
-                whenEnter();
-                document.addEventListener('click', playANDpause); 
-                document.addEventListener('click', likeBtnClicked);
-            });
+            showResultUI();
         }catch (err) {
             console.log(err);
         }
+    }else {
+        View.hideSuggestBox();
+        View.hideLoader();
     }
 };
 
+function showResultUI () {
+    components.suggestBar.addEventListener('click', (e) => {
+        components.input.value = e.target.childNodes[1].nodeValue;
+        View.hideSuggestBox();
+        whenEnter();
+        document.addEventListener('click', playANDpause); 
+        document.addEventListener('click', likeBtnClicked);
+    });
+}
 
 async function whenEnter () {
     //1. get the input from the view then clear it
@@ -69,7 +76,6 @@ async function whenEnter () {
     }
 };
 
-
 function soundReco () {
     getSoundValue();
     let timeIntrvl = setInterval(() => {
@@ -80,7 +86,6 @@ function soundReco () {
     }, 1000);
     document.addEventListener('click', playANDpause);
 };
-
 
 function playANDpause (e) {
     let el = e.target;
@@ -97,9 +102,10 @@ function playANDpause (e) {
     }
 };
 
-
-state.likedItem = new Modal.likedSong();
 function likeBtnClicked (e) {
+    if (!state.likedItem) {
+        state.likedItem = new Modal.likedSong();
+    }
     const el = e.target;
     if (el.classList.contains('like-btn')) {
         if (!el.classList.contains('clicked')) {
@@ -111,7 +117,6 @@ function likeBtnClicked (e) {
         }
     }
 };
-
 
 function favorisRequested () {
     components.popularBtn.classList.remove('selected');
@@ -125,7 +130,6 @@ function popularRequested () {
     components.favorisBtn.classList.remove('selected');
     firstTimeToPage();
 };
-
 
 function firstTimeToPage () {
     components.input.value = 'eminem';
