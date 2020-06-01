@@ -1,5 +1,4 @@
 import components from './bass';
-const myInput = document.querySelector(components.input);
 
 export function getSoundValue () {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -9,7 +8,7 @@ export function getSoundValue () {
         const current = event.resultIndex;
         const transcript = event.results[current][0].transcript;
 
-        myInput.value = transcript;
+        components.input.value = transcript;
         tst('You have just said' + transcript);
     }
 

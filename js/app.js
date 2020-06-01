@@ -1,30 +1,23 @@
 import "../sass/_main.scss";
-import "../sass/_nav-bar.scss";
-import "../sass/_search-bar.scss";
-import "../sass/_content.scss";
 
 import components from './bass';
 import * as View from './view';
 import * as Modal from './modal';
 import {getSoundValue} from './soundReco';
 
-
 const state = {};
-const popularBtn = document.getElementById(components.popular);
-const favorisBtn = document.getElementById(components.favoris);
 
-
-document.querySelector(components.input).addEventListener('input', liveSearch);
+components.input.addEventListener('input', liveSearch);
 document.addEventListener('keypress', e => {if (e.keyCode === 13) { 
     whenEnter();
     document.addEventListener('click', playANDpause);  
     document.addEventListener('click', likeBtnClicked); 
 }});
-document.querySelector(components.voiceIcon).addEventListener('click', soundReco); 
+components.voiceIcon.addEventListener('click', soundReco); 
 document.addEventListener('click', () => View.hideSuggestBox());
 addEventListener('load', firstTimeToPage);
-popularBtn.addEventListener('click', popularRequested);
-favorisBtn.addEventListener('click', favorisRequested);
+components.popularBtn.addEventListener('click', popularRequested);
+components.favorisBtn.addEventListener('click', favorisRequested);
 
 
 async function liveSearch () {
@@ -39,8 +32,8 @@ async function liveSearch () {
             await state.searchh.getData();
             View.displaySuggest(state.searchh.result);
             View.hideLoader();
-            document.querySelector(components.suggestBar).addEventListener('click', (e) => {
-                document.querySelector(components.input).value = e.target.childNodes[1].nodeValue;
+            components.suggestBar.addEventListener('click', (e) => {
+                components.input.value = e.target.childNodes[1].nodeValue;
                 View.hideSuggestBox();
                 whenEnter();
                 document.addEventListener('click', playANDpause); 
@@ -80,7 +73,7 @@ async function whenEnter () {
 function soundReco () {
     getSoundValue();
     let timeIntrvl = setInterval(() => {
-        if (document.querySelector(components.input).value !== "") {
+        if (components.input.value !== "") {
             whenEnter();
             clearInterval(timeIntrvl);
         }
@@ -94,11 +87,11 @@ function playANDpause (e) {
 
     if (el.className === 'pause-btn') {
         if (el.parentNode.parentNode.childNodes[1].paused) {
-            el.src = "./img/round_pause_circle_filled_white_18dp.png";
+            el.src = "./img/img/round_pause_circle_filled_white_18dp.png";
             el.parentNode.parentNode.childNodes[1].play();
         } 
         else {
-            el.src = "./img/play_circle_filled-24px.png";
+            el.src = "./img/img/play_circle_filled-24px.png";
             el.parentNode.parentNode.childNodes[1].pause();
         } 
     }
@@ -121,7 +114,7 @@ function likeBtnClicked (e) {
 
 
 function favorisRequested () {
-    popularBtn.classList.remove('selected');
+    components.popularBtn.classList.remove('selected');
     this.className = 'selected';
     View.clearUI();
     View.addItemToUI(JSON.parse(localStorage.getItem('likes')), 'clicked');
@@ -129,13 +122,13 @@ function favorisRequested () {
 
 function popularRequested () {
     this.className = 'selected';
-    favorisBtn.classList.remove('selected');
+    components.favorisBtn.classList.remove('selected');
     firstTimeToPage();
 };
 
 
 function firstTimeToPage () {
-    document.querySelector(components.input).value = 'eminem';
+    components.input.value = 'eminem';
     whenEnter();
     document.addEventListener('click', playANDpause); 
     document.addEventListener('click', likeBtnClicked);
