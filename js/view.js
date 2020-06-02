@@ -12,22 +12,24 @@ export function clearInput () {
 export function addItemToUI (arr, like) {
 
     for (let i=0; i<16; i++) {
-        const htmlContent = `
-        <div class="content__songs__col__songContainner">
-            <div class="song" data-img=${arr[i].album.cover_medium} data-id=${arr[i].id} style="background-image: url(${arr[i].album.cover_medium});">
-                <audio src="${arr[i].preview}"></audio>
-                <div class="icons">
-                    <img class="pause-btn" src="./img/img/play_circle_filled-24px.png" alt="">
-                    <img class="like-btn ${like}" src="./img/img/stars-24px.png" alt="">
+        if (arr !== undefined) {
+            const htmlContent = `
+            <div class="content__songs__col__songContainner">
+                <div class="song" data-img=${arr[i].album.cover_medium} data-id=${arr[i].id} style="background-image: url(${arr[i].album.cover_medium});">
+                    <audio src="${arr[i].preview}"></audio>
+                    <div class="icons">
+                        <img class="pause-btn" src="./img/img/play_circle_filled-24px.png" alt="">
+                        <img class="like-btn ${like}" src="./img/img/stars-24px.png" alt="">
+                    </div>
                 </div>
+                <div class="title">${arr[i].title}</div>
             </div>
-            <div class="title">${arr[i].title}</div>
-        </div>
-        `;
-        if (i < 4) components.colOne.insertAdjacentHTML('beforeend', htmlContent);
-        else if (i>=4 && i<8) components.colTwo.insertAdjacentHTML('beforeend', htmlContent);
-        else if (i>=8 && i<12) components.colThree.insertAdjacentHTML('beforeend', htmlContent);
-        else if (i>=12 && i<16) components.colFour.insertAdjacentHTML('beforeend', htmlContent);
+            `;
+            if (i < 4) components.colOne.insertAdjacentHTML('beforeend', htmlContent);
+            else if (i>=4 && i<8) components.colTwo.insertAdjacentHTML('beforeend', htmlContent);
+            else if (i>=8 && i<12) components.colThree.insertAdjacentHTML('beforeend', htmlContent);
+            else if (i>=12 && i<16) components.colFour.insertAdjacentHTML('beforeend', htmlContent);
+        }
     }
     
     initPlayIcon();
@@ -60,10 +62,11 @@ export function displaySuggest (arr) {
 
     components.suggestBar.style.display = 'inline-block';  
     
-    // console.log(arr)
-    for (let i=0; i<7; i++) {    
-        if (i >= arr.length) break;    
-        components.suggestBar.insertAdjacentHTML('beforeend', `<p><span class="arrow">></span> ${arr[i].title}</p>`);
+    for (let i=0; i<7; i++) {  
+        if (arr !== undefined) {
+            if (i >= arr.length) break;    
+            components.suggestBar.insertAdjacentHTML('beforeend', `<p><span class="arrow">></span> ${arr[i].title}</p>`);
+        } 
     }
 }
 
