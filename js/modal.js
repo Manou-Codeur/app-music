@@ -48,6 +48,11 @@ export class likedSong {
 
         this.addToStorage();
     }
+
+    readStorage() {
+        const storage = JSON.parse(localStorage.getItem('likes'));
+        if (storage) this.likes = storage;
+    }
 }   
 
 

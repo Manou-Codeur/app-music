@@ -24,7 +24,7 @@ components.favorisBtn.addEventListener('click', favorisRequested);
 async function liveSearch () {
     //1. get the input from the view
     View.displayLoader();
-    let inputValue = View.getInput();
+    const inputValue = View.getInput();
 
     //2. ask the model to fetch and return a list of 5 els by passing the input gotten as param and display these els in the list of recomand in UI 
     if (inputValue.trim()) {
@@ -55,7 +55,7 @@ function showResultUI () {
 
 async function whenEnter () {
     //1. get the input from the view then clear it
-    let inputValue = View.getInput().trim();
+    const inputValue = View.getInput().trim();
     View.clearInput();
     View.hideLoader();
     View.clearUI();
@@ -78,7 +78,7 @@ async function whenEnter () {
 
 function soundReco () {
     getSoundValue();
-    let timeIntrvl = setInterval(() => {
+    const timeIntrvl = setInterval(() => {
         if (components.input.value !== "") {
             whenEnter();
             clearInterval(timeIntrvl);
@@ -88,7 +88,7 @@ function soundReco () {
 };
 
 function playANDpause (e) {
-    let el = e.target;
+    const el = e.target;
 
     if (el.className === 'pause-btn') {
         if (el.parentNode.parentNode.childNodes[1].paused) {
@@ -103,11 +103,13 @@ function playANDpause (e) {
 };
 
 function likeBtnClicked (e) {
-    if (!state.likedItem) {
-        state.likedItem = new Modal.likedSong();
-    }
     const el = e.target;
     if (el.classList.contains('like-btn')) {
+        if (!state.likedItem) {
+            state.likedItem = new Modal.likedSong();
+            state.likedItem.readStorage();
+        } 
+
         if (!el.classList.contains('clicked')) {
             el.classList.add('clicked');
             state.likedItem.addLiked(el.parentNode.parentNode.dataset.id, el.parentNode.parentNode.dataset.img, el.parentNode.parentNode.childNodes[1].currentSrc, el.parentNode.parentNode.nextElementSibling.textContent);
