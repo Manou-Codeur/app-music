@@ -5,7 +5,7 @@ import * as View from './view';
 import * as Modal from './modal';
 import {getSoundValue} from './soundReco';
 
-const state = {};
+let state = {};
 
 components.input.addEventListener('keyup', liveSearch);
 document.addEventListener('keypress', e => {
@@ -20,6 +20,9 @@ document.addEventListener('click', () => View.hideSuggestBox());
 addEventListener('load', firstTimeToPage);
 components.popularBtn.addEventListener('click', popularRequested);
 components.favorisBtn.addEventListener('click', favorisRequested);
+document.addEventListener('keydown', e => {
+    if (e.key === "Escape") console.log(state);
+})
 
 async function liveSearch () {
     //1. get the input from the view
@@ -103,11 +106,13 @@ function playANDpause (e) {
 };
 
 function likeBtnClicked (e) {
-    if (!state.likedItem) {
-        state.likedItem = new Modal.likedSong();
-    }
     const el = e.target;
     if (el.classList.contains('like-btn')) {
+        if (!state.likedItem) {
+            state.likedItem = new Modal.likedSong();
+            console.log('i\'ve just created one')
+        } 
+
         if (!el.classList.contains('clicked')) {
             el.classList.add('clicked');
             state.likedItem.addLiked(el.parentNode.parentNode.dataset.id, el.parentNode.parentNode.dataset.img, el.parentNode.parentNode.childNodes[1].currentSrc, el.parentNode.parentNode.nextElementSibling.textContent);
