@@ -12,7 +12,7 @@ export function clearInput () {
 export function addItemToUI (arr, like) {
 
     for (let i=0; i<16; i++) {
-        let htmlContent = `
+        const htmlContent = `
         <div class="content__songs__col__songContainner">
             <div class="song" data-img=${arr[i].album.cover_medium} data-id=${arr[i].id} style="background-image: url(${arr[i].album.cover_medium});">
                 <audio src="${arr[i].preview}"></audio>
