@@ -43,6 +43,7 @@ export class likedSong {
 
     dltFromStorage (id) {
         const index = this.likes.findIndex(el => el.id === id);
+        console.log(index)
         this.likes.splice(index, 1);
 
         this.addToStorage();
