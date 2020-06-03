@@ -70,7 +70,7 @@ async function whenEnter () {
             View.hideMainLoader();
             View.addItemToUI(state.searchh.result);
         }catch (err) {
-            alert('Song not found!')
+            if (err.message === "Cannot read property 'album' of undefined" && View.isThereItems() === false) alert('Song not found!');
         }
     }else {
         alert('filled not accepted!')

@@ -35,6 +35,11 @@ export function addItemToUI (arr, like) {
     initPlayIcon();
 }
 
+export function isThereItems () {
+    const songs = document.querySelectorAll('.content__songs__col__songContainner');
+    if (songs.length === 0) return false;
+}
+
 export function clearUI () {
     const col1Items = document.querySelectorAll(`.one .content__songs__col__songContainner`);
     const col2Items = document.querySelectorAll(`.two .content__songs__col__songContainner`);
