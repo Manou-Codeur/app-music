@@ -15,7 +15,7 @@ export class generateData {
             const res = await (await fetch(`https://deezerdevs-deezer.p.rapidapi.com/search?q=${this.input}`, config)).json();
             this.result = res.data;
         }catch (err) {
-            console.log(err.message);
+            alert('There\'s a technical problem, try again!');
         }       
     }
 }

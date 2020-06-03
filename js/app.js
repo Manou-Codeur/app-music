@@ -32,6 +32,7 @@ async function liveSearch () {
         try {
             await state.searchh.getData();
             View.displaySuggest(state.searchh.result);
+            if (state.searchh.result !== undefined) if (state.searchh.result.length === 0) View.hideSuggestBox();
             View.hideLoader();
             showResultUI();
         }catch (err) {
@@ -69,7 +70,7 @@ async function whenEnter () {
             View.hideMainLoader();
             View.addItemToUI(state.searchh.result);
         }catch (err) {
-            console.log(err);
+            alert('Song not found!')
         }
     }else {
         alert('filled not accepted!')
